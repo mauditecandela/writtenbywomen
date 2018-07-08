@@ -3,6 +3,7 @@ class Body extends React.Component {
     return (
       <div>
         <AllBooks />
+        <NewBook />
       </div>
     )
   }
