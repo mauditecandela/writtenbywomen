@@ -12,8 +12,16 @@ class NewBook extends React.Component {
     }
 
     handleSubmit(event) {
-      console.log(this.bookName.value)
-      console.log(this.description.value)
+      var name = this.bookName.value;
+      var description = this.description.value;
+      $.ajax({
+        url: 'api/v1/books',
+        type: 'POST',
+        data: { book: { name: name, description: description } },
+        success: (response) => {
+          console.log('it worked!', response)
+        }
+      })
     }
 
   render() {
