@@ -1,10 +1,11 @@
 class Body extends React.Component {
-  constructor(){
-      super()
+  constructor(props){
+      super(props);
       this.state = {
         books: []
       }
     }
+
 
   componentDidMount() {
     fetch('/api/v1/books.json')
@@ -15,11 +16,15 @@ class Body extends React.Component {
       .catch(err => console.error(this.props.url, err.toString()))
   }
 
+  handleSubmit(book) {
+    console.log(book);
+  }
+
   render(){
     return (
       <div>
         <AllBooks books={this.state.books}/>
-        <NewBook />
+        <NewBook handleSubmit={this.handleSubmit}/>
       </div>
     )
   }
