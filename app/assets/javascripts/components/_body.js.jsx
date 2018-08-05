@@ -20,10 +20,28 @@ class Body extends React.Component {
     this.setState({ books: newState })
   }
 
-  render(){
+  removeBookClient(id) {
+    var newBooks = this.state.books.filter((book) => {
+      return book.id != id;
+    })
+    this.setState({books: newBooks})
+  }
+
+  handleDelete(id) {
+    $.ajax({
+        url: `/api/v1/books/${id}`,
+        type: 'DELETE',
+        success(response) {
+          this.removeBookClient(id);
+        }
+    })
+  }
+
+
+  render() {
     return (
       <div>
-        <AllBooks books={this.state.books}/>
+        <AllBooks books={this.state.books}  handleDelete={this.handleDelete}/>
         <NewBook handleSubmit={this.handleSubmit.bind(this)}/>
       </div>
     )
