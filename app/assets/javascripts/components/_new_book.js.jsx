@@ -8,7 +8,7 @@ class NewBook extends React.Component {
   }
 
   componentWillMount() {
-    handleSubmit= this.props.handleSubmit.bind(this);
+    handleSubmit= this.props.handleSubmit;
   }
 
   handleClick(event) {

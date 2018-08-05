@@ -6,7 +6,6 @@ class Body extends React.Component {
       }
     }
 
-
   componentDidMount() {
     fetch('/api/v1/books.json')
       .then(response => response.json())
@@ -17,14 +16,15 @@ class Body extends React.Component {
   }
 
   handleSubmit(book) {
-    console.log(book);
+    var newState = this.state.books.concat(book);
+    this.setState({ books: newState })
   }
 
   render(){
     return (
       <div>
         <AllBooks books={this.state.books}/>
-        <NewBook handleSubmit={this.handleSubmit}/>
+        <NewBook handleSubmit={this.handleSubmit.bind(this)}/>
       </div>
     )
   }
