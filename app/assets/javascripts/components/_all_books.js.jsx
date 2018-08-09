@@ -10,7 +10,7 @@ class AllBooks extends React.Component {
         <div key={book.id}>
           <h3>{book.name}</h3>
           <p>{book.description}</p>
-          <button onClick={this.handleDelete.bind(this, book.id)}>Delete</button>
+          <button onClick={this.handleDelete.bind(this, book)}>Delete</button>
         </div>
       )
     });
