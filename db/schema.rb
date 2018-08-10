@@ -10,14 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180706164659) do
+ActiveRecord::Schema.define(version: 20180810135241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "books", force: :cascade do |t|
+  create_table "authors", force: :cascade do |t|
     t.string "name"
-    t.text "description"
+    t.string "surname"
+    t.date "date_of_birth"
+    t.date "date_of_death"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "book_genres", force: :cascade do |t|
+    t.integer "book_id"
+    t.integer "genre_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.integer "author_id"
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "male_authors", force: :cascade do |t|
+    t.string "name"
+    t.string "surname"
+    t.date "date_of_birth"
+    t.date "date_of_death"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
