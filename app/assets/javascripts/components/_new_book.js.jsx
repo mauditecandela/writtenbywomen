@@ -27,9 +27,9 @@ class NewBook extends React.Component {
   render() {
     return (
       <div>
-        <input ref={this.bookName} placeholder="Enter the name of the book" />
-        <input ref={this.description} placeholder="Add a description" />
-        <button onClick={this.handleClick}>Submit</button>
+        <input ref={this.bookName} placeholder={I18n.t('new_book.title_placeholder')} />
+        <input ref={this.description} placeholder={I18n.t('new_book.description_placeholder')} />
+        <button onClick={this.handleClick}>{I18n.t('new_book.submit')}</button>
       </div>
     )
   }
