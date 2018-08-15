@@ -1,7 +1,8 @@
 # README
 
-Creates a Rails + React app following the instructions of this tutorial. https://github.com/pluralsight/guides/blob/master/published/ruby-ruby-on-rails/building-a-crud-interface-with-react-and-ruby-on-rails/article.md
-Adapts the tutorial to ES16
-
 * Rails version 5.1.6
-* Ruby version 2.3.1 - probably global at my machine, may update to 2.5 soon
+* Ruby version 2.3.1 - may update to 2.5 soon
+
+This app is a work in progress that I would like to maintain as Free Open Software soon. The main goal is to create an app that recommends books written by women, to decrease the gender gap in literature.
+
+Currently the app is a simple Rails App that serves as API to a React Frontend. 
