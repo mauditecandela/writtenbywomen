@@ -14,8 +14,8 @@ class CreateAuthor < ActiveRecord::Migration[5.1]
     end
 
     create_table :author_authors do |t|
-      t.integer :first_author_id
-      t.integer :second_author_id
+      t.integer :author_id
+      t.integer :related_author_id
     end
   end
 end
