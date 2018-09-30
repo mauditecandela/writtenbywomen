@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+
+@import "fonts";
+
+$leaguespartan: 'league-spartan';
+
+body {
+  h1 {
+    font-family: $leaguespartan;
+    span {
+      color: #8A0808;
+    }
+  }
+}

@@ -30,9 +30,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  header:
-    title: "Written by women"
-
   new_book:
     title_placeholder: "Enter the title of the book"
     description_placeholder: "Add a description"
