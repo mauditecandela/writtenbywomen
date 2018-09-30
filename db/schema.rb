@@ -16,7 +16,8 @@ ActiveRecord::Schema.define(version: 20180930134655) do
   enable_extension "plpgsql"
 
   create_table "author_authors", force: :cascade do |t|
-    t.integer "author_id"
+    t.integer "first_author_id"
+    t.integer "second_author_id"
   end
 
   create_table "author_male_authors", force: :cascade do |t|
