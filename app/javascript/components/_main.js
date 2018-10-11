@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from './Header.js';
-import Body from './Body.js';
+import Header from './_header.js';
+import Body from './_body.js';
 
 class Main extends React.Component {
   render() {
