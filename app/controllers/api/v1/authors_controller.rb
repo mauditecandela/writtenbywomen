@@ -1,4 +1,4 @@
-class Api::V1::BooksController < Api::V1::BaseController
+class Api::V1::AuthorsController < Api::V1::BaseController
   def index
     respond_with Author.all
   end
@@ -12,20 +12,26 @@ class Api::V1::BooksController < Api::V1::BaseController
   end
 
   def update
-    book = Book.find(params["id"])
-    book.update_attributes(book_params)
-    respond_with book, json: book
+    author = Author.find(params["id"])
+    author.update_attributes(book_params)
+    respond_with author, json: author
+  end
+
+  def show
+    author = Author.find(params["id"])
+    api_call = goodreads_api(author.goodreads_id)
+    respond_with api_call
   end
 
   private
 
   def book_params
-    params.require(:book).permit(:id, :name, :description)
+    params.require(:book).permit(:id, :goodreads_id)
   end
-end
 
-
-def goodreads_API
-  key = "VWw1eb9RgwVIwQq31TL2A"
-  secret = "TJ7GRGNIos1s8ILUMLKlZDFWkIOKgjhPhz7eIXva44"
+  def goodreads_api(id)
+    url = "https://www.goodreads.com/author/list.xml"
+    key = "VWw1eb9RgwVIwQq31TL2A"
+    RestClient.get("#{url}?key=VWw1eb9RgwVIwQq31TL2A&id=#{id}")
+  end
 end
