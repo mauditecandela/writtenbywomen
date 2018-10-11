@@ -1,6 +1,5 @@
 import React from 'react';
-
-const goodReadsJSONResponse = require(goodreads-json-api);
+import GoodreadsJsonApi from 'goodreads-json-api';
 
 class Author extends React.Component {
   constructor(props){
@@ -14,11 +13,11 @@ class Author extends React.Component {
     fetch(`/authors/${this.props.author.id}.xml`)
        .then(response => response.text())
        .then((response) => {
-         const resp = goodReadsJSONResponse.convertToJson(rawData)
+         const resp = GoodreadsJsonApi.convertToJson(response)
          console.log(resp)
-         newState = {};
-         newState.name = response.name;
-         this.setState(author = newState);
+         let newState = {}
+         newState = {author: {name: resp.author.name }}
+         this.setState(newState)
        }).catch((err) => {
            console.log('fetch', err)
        })
