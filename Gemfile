@@ -11,8 +11,9 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'responders'
 gem 'rest-client'
-gem 'react-rails'
 gem 'i18n-js'
+gem 'webpacker', '~> 3.5'
+gem 'react-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

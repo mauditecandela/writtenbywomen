@@ -1,3 +1,7 @@
+import React from 'react';
+
+import AllAuthors from './_all_authors.js';
+
 class Body extends React.Component {
   constructor(props){
       super(props);
@@ -49,3 +53,5 @@ class Body extends React.Component {
     )
   }
 }
+
+export default Body;

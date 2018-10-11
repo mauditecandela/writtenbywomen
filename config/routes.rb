@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :books, only: [:index, :create, :destroy, :update]
-      resources :authors
+      resources :authors, only: [:index, :create, :destroy, :update]
     end
   end
+
+  get '/authors/:id', to: 'api/v1/authors#show', as: :author
 end

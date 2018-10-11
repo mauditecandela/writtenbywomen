@@ -1,3 +1,5 @@
+import React from 'react';
+
 class AllAuthors extends React.Component {
   componentDidMount() {
     this.handleDelete = this.props.handleDelete;
@@ -5,17 +7,18 @@ class AllAuthors extends React.Component {
 
   render() {
     var authors = this.props.authors.map((author) => {
-
       return (
-        <div key={author.id}>
-          <h3>{author.goodreads_id}</h3>
-        </div>
+        <span key={author.id}>
+          <h3>{author.id}</h3><a href={`/authors/${author.id}`}>Go to author</a>
+        </span>
       )
     });
     return (
-      <div>
+      <section>
         {authors}
-      </div>
+      </section>
     )
   }
 };
+
+export default AllAuthors;

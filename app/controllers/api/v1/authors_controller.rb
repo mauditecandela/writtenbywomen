@@ -18,9 +18,12 @@ class Api::V1::AuthorsController < Api::V1::BaseController
   end
 
   def show
-    author = Author.find(params["id"])
-    api_call = goodreads_api(author.goodreads_id)
-    respond_with api_call
+    @author = Author.find(params["id"])
+    api_call = goodreads_api(@author.goodreads_id)
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => api_call }
+    end
   end
 
   private
