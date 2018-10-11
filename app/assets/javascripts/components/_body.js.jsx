@@ -2,39 +2,39 @@ class Body extends React.Component {
   constructor(props){
       super(props);
       this.state = {
-        books: []
+        authors: []
       }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     }
 
   componentDidMount() {
-    fetch('/api/v1/books.json')
+    fetch('/api/v1/authors.json')
       .then(response => response.json())
       .then(data => {
-        this.setState({books: data })
+        this.setState({authors: data })
     })
       .catch(err => console.error(this.props.url, err.toString()));
   }
 
-  handleSubmit(book) {
-    var newState = this.state.books.concat(book);
-    this.setState({ books: newState })
+  handleSubmit(author) {
+    var newState = this.state.authors.concat(author);
+    this.setState({ authors: newState })
   }
 
   removeBookClient(id) {
-    var newBooks = this.state.books.filter((book) => {
-      return book.id != id;
+    var newAuthors = this.state.authors.filter((author) => {
+      return author.id != id;
     });
-    this.setState({books: newBooks})
+    this.setState({authors: newAuthors})
   }
 
-  handleDelete(book) {
+  handleDelete(author) {
     $.ajax({
-        url: `/api/v1/books/${book.id}`,
+        url: `/api/v1/authors/${author.id}`,
         type: 'DELETE',
         success: (response) => {
-          this.removeBookClient(book.id);
+          this.removeAuthorClient(author.id);
         }
     })
   }
@@ -44,8 +44,7 @@ class Body extends React.Component {
     console.log(this);
     return (
       <div>
-        <AllBooks books={this.state.books}  handleDelete={this.handleDelete}/>
-        <NewBook handleSubmit={this.handleSubmit}/>
+        <AllAuthors authors={this.state.authors}  handleDelete={this.handleDelete}/>
       </div>
     )
   }
