@@ -1,33 +1,26 @@
 import React from 'react';
-import GoodreadsJsonApi from 'goodreads-json-api';
 
 class Author extends React.Component {
   constructor(props){
       super(props);
       this.state = {
-        author: {}
+        name: this.props.author_data.GoodreadsResponse.author.name,
+        books: this.props.author_data.GoodreadsResponse.author.books.book
       }
     }
 
-  componentDidMount() {
-    fetch(`/authors/${this.props.author.id}.xml`)
-       .then(response => response.text())
-       .then((response) => {
-         const resp = GoodreadsJsonApi.convertToJson(response)
-         console.log(resp)
-         let newState = {}
-         newState = {author: {name: resp.author.name }}
-         this.setState(newState)
-       }).catch((err) => {
-           console.log('fetch', err)
-       })
-  }
-
   render() {
-    console.log(this.state.author.name);
+    const books = this.state.books.map(function(book) {
+      return (
+        <span key={"book_" + book.id}>
+          <p>{book.title}</p>
+        </span>
+      )
+    });
     return (
       <section>
-        {this.state.author.name}
+        <h1>{this.state.name}</h1>
+        {books}
       </section>
     )
   }
