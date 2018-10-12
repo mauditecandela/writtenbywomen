@@ -19,10 +19,10 @@ class Api::V1::AuthorsController < Api::V1::BaseController
 
   def show
     @author = Author.find(params["id"])
-    api_call = goodreads_api(@author.goodreads_id)
+    @author_data = Crack::XML.parse(goodreads_api(@author.goodreads_id));
     respond_to do |format|
       format.html
-      format.xml { render :xml => api_call }
+      format.json{ render :json => @author_data }
     end
   end
 
