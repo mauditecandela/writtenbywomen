@@ -23,8 +23,8 @@ class AllAuthors extends React.Component {
   render() {
     let authors = Object.keys(this.state.authors).map((author) => {
       return (
-        <span key={author}>
-          <Author id={author} name={this.state.authors[author].name} surname={this.state.authors[author].surname} />
+        <span key={this.state.authors[author].id}>
+          <Author id={this.state.authors[author].id} name={this.state.authors[author].name} surname={this.state.authors[author].surname} />
         </span>
       )
     })
