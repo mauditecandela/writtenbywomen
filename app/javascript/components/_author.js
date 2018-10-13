@@ -2,12 +2,9 @@ import React from 'react';
 
 class Author extends React.Component {
   render() {
-    let authorName;
-    if (this.props.authorsData) {
-      authorName = this.props.authorsData.GoodreadsResponse.author.name;
-    }
+    console.log(this.props.name)
     return (
-      <p><a href={`/authors/${this.props.id}`}>{authorName}</a></p>
+      <p><a href={`/authors/${this.props.id}`}>{this.props.name} {this.props.surname}</a></p>
     )
   }
 };

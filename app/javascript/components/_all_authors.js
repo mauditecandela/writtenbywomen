@@ -6,8 +6,7 @@ class AllAuthors extends React.Component {
   constructor(props){
       super(props);
       this.state = {
-        authors: [],
-        authorsData: {}
+        authors: {}
       }
     }
 
@@ -15,22 +14,21 @@ class AllAuthors extends React.Component {
     fetch('/api/v1/authors.json')
       .then(response => response.json())
       .then(data => {
-        this.setState({authors: Object.keys(data)})
-        this.setState({authorsData: data })
+        this.setState({authors: data})
     })
       .catch(err => console.error(this.props.url, err.toString()));
 
   }
-  
+
   render() {
-    let authorsData = this.state.authorsData;
-    let authors = this.state.authors.map(function(author) {
+    let authors = Object.keys(this.state.authors).map((author) => {
       return (
         <span key={author}>
-          <Author id={author} authorsData={authorsData[author]} />
+          <Author id={author} name={this.state.authors[author].name} surname={this.state.authors[author].surname} />
         </span>
       )
     })
+
     return (
       <section>
         {authors}
