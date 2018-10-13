@@ -1,27 +1,13 @@
 import React from 'react';
 
 class Author extends React.Component {
-  constructor(props){
-      super(props);
-      this.state = {
-        name: this.props.author_data.GoodreadsResponse.author.name,
-        books: this.props.author_data.GoodreadsResponse.author.books.book
-      }
-    }
-
   render() {
-    const books = this.state.books.map(function(book) {
-      return (
-        <span key={"book_" + book.id}>
-          <p>{book.title}</p>
-        </span>
-      )
-    });
+    let authorName;
+    if (this.props.authorsData) {
+      authorName = this.props.authorsData.GoodreadsResponse.author.name;
+    }
     return (
-      <section>
-        <h1>{this.state.name}</h1>
-        {books}
-      </section>
+      <p><a href={`/authors/${this.props.id}`}>{authorName}</a></p>
     )
   }
 };
