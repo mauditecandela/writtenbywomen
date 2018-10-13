@@ -1,6 +1,14 @@
 class Api::V1::AuthorsController < Api::V1::BaseController
   def index
-    respond_with Author.all
+    @authors = {}
+    Author.all.each do |author|
+      @authors[author.id] = Crack::XML.parse(goodreads_api(author.goodreads_id));
+    end
+
+    respond_to do |format|
+      format.html
+      format.json{ render :json => @authors }
+    end
   end
 
   def create
