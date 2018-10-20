@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   end
 
   get '/authors/:id', to: 'api/v1/authors#show', as: :author
+  get '/search_authors', to: 'api/v1/authors#search_authors', as: :search_authors
 end
