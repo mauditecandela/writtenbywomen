@@ -1,7 +1,6 @@
 import React from 'react';
 
 import SearchAuthors from './_search_authors.js'
-import AllAuthors from './_all_authors.js';
 
 class Body extends React.Component {
   handleSubmit(author) {
