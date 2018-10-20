@@ -21,8 +21,16 @@ class Api::V1::AuthorsController < Api::V1::BaseController
   end
 
   def show
-    @author = Author.find(params["id"])
-    @author_data = Crack::XML.parse(goodreads_api(@author.goodreads_id));
+    @author_data = Crack::XML.parse(goodreads_api(params["id"]))
+    respond_to do |format|
+      format.html
+      format.json{ render :json => @author_data }
+    end
+  end
+
+  def search_authors
+    query = params["query"]
+    @author_data = Crack::XML.parse(goodreads_search(query))
     respond_to do |format|
       format.html
       format.json{ render :json => @author_data }
@@ -39,5 +47,11 @@ class Api::V1::AuthorsController < Api::V1::BaseController
     url = "https://www.goodreads.com/author/list.xml"
     key = "VWw1eb9RgwVIwQq31TL2A"
     RestClient.get("#{url}?key=VWw1eb9RgwVIwQq31TL2A&id=#{id}")
+  end
+
+  def goodreads_search(query)
+    url = "https://www.goodreads.com/api/author_url/"
+    key = "VWw1eb9RgwVIwQq31TL2A"
+    RestClient.get("#{url}#{query}?key=VWw1eb9RgwVIwQq31TL2A")
   end
 end
