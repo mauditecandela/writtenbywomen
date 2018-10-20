@@ -1,6 +1,6 @@
 import React from 'react';
 
-class AuthorDetails extends React.Component {
+class AuthorShow extends React.Component {
   constructor(props){
       super(props);
       this.state = {
@@ -26,4 +26,4 @@ class AuthorDetails extends React.Component {
   }
 };
 
-export default AuthorDetails;
+export default AuthorShow;
