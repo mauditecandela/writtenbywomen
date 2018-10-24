@@ -4,34 +4,42 @@ class SearchAuthors extends React.Component {
   constructor(props){
       super(props);
       this.state = {
-        author: {}
+        authors: []
       }
       this.searchAuthors = this.searchAuthors.bind(this);
     }
 
   searchAuthors() {
-    fetch(`/search_authors.json?query=${this.refs.query.value}`)
+    fetch(`http://openlibrary.org/search.json?author=${this.refs.query.value}`)
       .then(response => response.json())
       .then(data => {
-        this.setState({author: data.GoodreadsResponse.author})
+        const authors = this.renderSuggestions(data.docs);
+        this.setState({authors})
     })
       .catch(err => console.error(this.props.url, err.toString()));
   }
 
-  renderSuggestion() {
-    if (this.state.author.name) {
-      return (
-        <p>Did you mean <a href={`/authors/${this.state.author.id}`}>{this.state.author.name}</a>?</p>
-      )
+  renderSuggestions(authors) {
+    const listOfAuthors = [];
+    for (let i = 0; i < authors.length; i++) {
+      listOfAuthors[i] = authors[i].author_name[0]
     }
+    return Array.from(new Set(listOfAuthors));
   }
 
   render() {
+    const authors = this.state.authors.map((author) => {
+      return (
+        <span key={"author_" + this.state.authors.indexOf(author)}>
+          <p>{author}</p>
+        </span>
+    )
+    });
     return (
       <section>
         <input ref="query" type="text"></input>
         <button onClick={this.searchAuthors}>Search</button>
-        {this.renderSuggestion()}
+        {authors}
       </section>
     )
   }
