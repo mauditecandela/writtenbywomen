@@ -13,18 +13,31 @@ class SearchAuthors extends React.Component {
     fetch(`http://openlibrary.org/search.json?author=${this.refs.query.value}`)
       .then(response => response.json())
       .then(data => {
-        const authors = this.renderSuggestions(data.docs);
+        const authors = this.defineListOfAuthors(data.docs);
         this.setState({authors})
     })
       .catch(err => console.error(this.props.url, err.toString()));
   }
 
-  renderSuggestions(authors) {
+  defineListOfAuthors(authors) {
     const listOfAuthors = [];
     for (let i = 0; i < authors.length; i++) {
-      listOfAuthors[i] = authors[i].author_name[0]
+      if (listOfAuthors.indexOf(authors[i].author_name[0]) < 0) {
+        listOfAuthors.push(authors[i].author_name[0]);
+        this.goodreadsID(authors[i].author_name[0]);
+      }
     }
-    return Array.from(new Set(listOfAuthors));
+    return listOfAuthors;
+  }
+
+  goodreadsID(author) {
+    fetch(`/search_authors.json?query=${author}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.GoodreadsResponse.author);
+        return data.GoodreadsResponse.author;
+    })
+      .catch(err => console.error(this.props.url, err.toString()));
   }
 
   render() {
