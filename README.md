@@ -5,4 +5,10 @@
 
 This app is a work in progress that I would like to maintain as Free Open Software soon. The main goal is to create an app that recommends books written by women, to decrease the gender gap in literature.
 
-Currently the app is a simple Rails App that serves as API to a React Frontend. 
+Currently the app is a simple Rails App that serves as API to a React Frontend.
+
+Dependencies:
+- Yarn
+- Postgress
+(You can install both by using brew)
+
