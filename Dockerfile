@@ -1,31 +1,27 @@
 FROM ruby:2.4.0
 MAINTAINER https://github.com/mauditecandela
 
-# Configure the main working directory. This is the base
-# directory used in any further RUN, COPY, and ENTRYPOINT
-# commands.
+RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs npm
+
 RUN mkdir -p /writtenbywomen
 WORKDIR /writtenbywomen
-
-# Copy the Gemfile as well as the Gemfile.lock and install
-# the RubyGems. This is a separate step so the dependencies
-# will be cached unless changes to one of those two files
-# are made.
 
 COPY Gemfile /writtenbywomen/Gemfile
 COPY Gemfile.lock /writtenbywomen/Gemfile.lock
 RUN bundle install
 COPY . /writtenbywomen
 
-FROM node:8 as react-build
-RUN yarn install
+COPY package.json yarn.lock /writtenbywomen/
+RUN npm install -g yarn
+RUN npm build
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 
 ENTRYPOINT ["entrypoint.sh"]
-EXPOSE 3000
 
-# Start the main process.
-CMD ["rails", "server", "-b", "0.0.0.0"]
+ENV RAILS_ENV=production
+
+CMD ["bundle", "exec", "rails", "s", "-p", "3000", "-b", "'0.0.0.0'"]
