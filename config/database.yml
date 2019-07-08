@@ -13,7 +13,9 @@ default: &default
 
 development:
   <<: *default
-  database: written_by_women_development
+  min_messages: WARNING
+  username: postgres
+  host: db
 
 test:
   <<: *default

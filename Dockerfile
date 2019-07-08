@@ -1,3 +1,4 @@
+
 FROM ruby:2.4.0
 MAINTAINER https://github.com/mauditecandela
 
@@ -13,7 +14,6 @@ RUN bundle install
 COPY . /writtenbywomen
 
 COPY package.json yarn.lock /writtenbywomen/
-RUN npm install -g yarn
 RUN npm build
 
 # Add a script to be executed every time the container starts.
@@ -21,7 +21,3 @@ COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 
 ENTRYPOINT ["entrypoint.sh"]
-
-ENV RAILS_ENV=production
-
-CMD ["bundle", "exec", "rails", "s", "-p", "3000", "-b", "'0.0.0.0'"]

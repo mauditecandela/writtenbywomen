@@ -12,3 +12,14 @@ Dependencies:
 - Postgress
 (You can install both by using brew)
 
+
+# Docker installation
+
+If you use docker and have `docker-compose` installed, you can run:
+
+- `docker-compose build`
+- `docker-compose run web bin/rails db:create`
+- `docker-compose run web bin/rails db:migrate`
+- `docker-compose up`
+
+...and start having fun!
