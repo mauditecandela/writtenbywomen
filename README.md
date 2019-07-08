@@ -18,8 +18,8 @@ Dependencies:
 If you use docker and have `docker-compose` installed, you can run:
 
 - `docker-compose build`
-- `docker-compose run web bin/rails db:create`
-- `docker-compose run web bin/rails db:migrate`
+- `docker-compose exec writtenbywomen_web bin/rails db:create`
+- `docker-compose exec writtenbywomen_web bin/rails db:migrate RAILS_ENV=development`
 - `docker-compose up`
 
 ...and start having fun!
